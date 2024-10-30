@@ -1,7 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
 const MONGODB = require("./Repository/MongoDB");
+const BlogRouter = require("./UseCase/BlogRouter");
 require('dotenv').config();
 MONGODB();
 const app = express();
-
+app.use(express.json());
+app.use(morgan('dev'));
+app.use('/api', BlogRouter);
 module.exports = app;
